@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Props State Assign</title>
+  </head>
+
+  <body>
+
+    <div id="app"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <script type="text/babel">
+
+      class Welcome extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = {name: "Joe"}
+        }
+
+        render() {
+          setTimeout(()=> {
+            this.setState( {name:  "Me again!"} )
+           }, 2000);
+
+          return (
+            <div>
+              <h1>Welcome {this.state.name}!!</h1>
+            </div>
+          )
+        }
+      }
+
+      const  app = document.getElementById('app');
+      ReactDOM.render(<Welcome/>, app);
+
+    </script>
+
+
+  </body>
+
+</html>
