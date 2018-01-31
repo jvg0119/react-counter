@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Bloc</title>
+  </head>
+
+  <body>
+
+    <div id="app"></div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+     <script type="text/babel">
+
+      class Welcome extends React.Component {
+
+        constructor(props) {
+          super(props);
+          this.state = { itsOn: true, result: true }
+          // This binding is necessary to make `this` work in the callback
+          console.log('this inside constructor >>> ', this) // this is Welcome
+          this.clickIt = this.clickIt.bind(this)
+
+          this.testFunction = this.testFunction.bind(this);
+
+        }
+
+        // handleClick() {
+        //     this.setState(prevState => ({
+        //       isToggleOn: !prevState.isToggleOn
+        //     }));
+        //   }
+
+        clickIt() {
+          console.log('clicking it!')
+        //  this.setState({itsOn: false} )
+          this.setState( prevState => ({itsOn: !prevState.itsOn}) )
+
+          // E5 function
+          // this.setState( function(prevState) {
+          //   return {itsOn: !prevState.itsOn}
+          // })
+        }
+
+        testFunction() {
+          console.log('this is testFunction!!!')
+          console.log('this   inside testFunction >>> ', this)
+          // the "this" in a function of a class is undefined until it is binded to the constructor
+    //      this.setState({oldVal => ({result: !oldVal.result}) // didn't like this line
+          this.setState( oldState => ({result: !oldState.result}))
+          console.log('after result = ', this.state.result)
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>Welcome !</h1>
+                <button onClick={this.clickIt}>
+                  Click It!
+                  {this.state.itsOn === true? ' - ON'  : ' - OFF '}
+                  </button>
+                  &nbsp;
+                  <button onClick={this.testFunction}>
+                    Click testFunction! {this.state.result === true ? ' - bingo' : ' -  bongo'}
+                  </button>
+            </div>
+          )
+        }
+      }
+
+      const app = document.getElementById('app');
+      ReactDOM.render(<Welcome/>, app);
+
+////////////////////////////////////////
+// E6 arrow function
+
+console.log('regular function >>> ',
+  function(x,y) {
+    return x + y;
+  }(2,5)
+)
+
+console.log('arrow function >>> ',
+  ((x,y) => x + y )(3,10)
+)
+
+var a = (x,y) => x * y
+console.log(a(100, 2))
+
+var arr = [1,2,3,4,5]
+arr.map(function(x) {
+  console.log(x*2)
+});
+
+arr.map((x)=> console.log(x * 5) )
+
+console.log('=======');
+var a = arr.map( (x) =>  x * 100 )
+console.log(a)
+
+     </script>
+
+
+  </body>
+
+</html>
