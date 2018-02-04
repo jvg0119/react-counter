@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
+
 import './App.css';
 import ToDo from './components/ToDo.js';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      todos: [
+        { description: 'Walk the cat', isCompleted: true },
+        { description: 'Throw the dishes away', isCompleted: false },
+        { description: 'Buy new dishes', isCompleted: false }
+      ]
+    };
+  }
+
   render() {
+    let a = this.state.todos.map((todo, index) => { return todo.description +' - ' + todo.isCompleted + ' - ' + index });
     return (
       <div className="App">
-      {/*  commenting inside JSX
-      // <header className="App-header">
-      //   <img src={logo} className="App-logo" alt="logo" />
-      //   <h1 className="App-title">Welcome to React</h1>
-      // </header>
-      // <p className="App-intro">
-      //   To get started, edit <code>src/App.js</code> and save to reload.
-      // </p>
-      */}
-      <ul>
-        <ToDo />
-        <ToDo />
-      </ul>
+        <ul>
+          { this.state.todos.map( (todo, index) =>
+            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } />
+          )}
+        </ul>
       </div>
     );
   }
+
 }
 
 export default App;
-//export default ToDo;
